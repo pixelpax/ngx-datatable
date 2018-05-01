@@ -8,30 +8,32 @@ import { MouseEvent } from '../../events';
   selector: 'datatable-row-wrapper',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div 
-      *ngIf="groupHeader && groupHeader.template"
-      class="datatable-group-header"
-      [ngStyle]="getGroupHeaderStyle()">
-      <ng-template
+    <tr>
+      <div 
         *ngIf="groupHeader && groupHeader.template"
-        [ngTemplateOutlet]="groupHeader.template"
-        [ngTemplateOutletContext]="groupContext">
-      </ng-template>
-    </div>
-    <ng-content 
-      *ngIf="(groupHeader && groupHeader.template && expanded) || 
-             (!groupHeader || !groupHeader.template)">
-    </ng-content>
-    <div
-      *ngIf="rowDetail && rowDetail.template && expanded"
-      [style.height.px]="detailRowHeight"
-      class="datatable-row-detail">
-      <ng-template
-        *ngIf="rowDetail && rowDetail.template"
-        [ngTemplateOutlet]="rowDetail.template"
-        [ngTemplateOutletContext]="rowContext">
-      </ng-template>
-    </div>
+        class="datatable-group-header"
+        [ngStyle]="getGroupHeaderStyle()">
+        <ng-template
+          *ngIf="groupHeader && groupHeader.template"
+          [ngTemplateOutlet]="groupHeader.template"
+          [ngTemplateOutletContext]="groupContext">
+        </ng-template>
+      </div>
+      <ng-content 
+        *ngIf="(groupHeader && groupHeader.template && expanded) || 
+              (!groupHeader || !groupHeader.template)">
+      </ng-content>
+      <div
+        *ngIf="rowDetail && rowDetail.template && expanded"
+        [style.height.px]="detailRowHeight"
+        class="datatable-row-detail">
+        <ng-template
+          *ngIf="rowDetail && rowDetail.template"
+          [ngTemplateOutlet]="rowDetail.template"
+          [ngTemplateOutletContext]="rowContext">
+        </ng-template>
+      </div>
+    </tr>
   `,
   host: {
     class: 'datatable-row-wrapper'
